@@ -2,17 +2,28 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const BMICalculatorApp());
 
+final ThemeData customTheme = ThemeData(
+  primaryColor: Colors.red, // Change this color to your desired primary color
+  // Add more properties like textTheme, fontFamily, etc. if needed
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor:
+        Colors.green, // Change this color to your desired FAB color
+  ),
+);
+
 class BMICalculatorApp extends StatelessWidget {
   const BMICalculatorApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: customTheme, // Use the custom theme here
       initialRoute: '/',
+
       routes: {
         '/': (context) => const BMICalculator(),
         '/bmr': (context) => const BMRCalculator(),
-        '/bmi': (context) => const BMICalculator(), // Add this route
+        '/bmi': (context) => const BMICalculator(),
       },
     );
   }
@@ -35,6 +46,7 @@ class _BMICalculatorState extends State<BMICalculator> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kalkualtor BMI'),
+        backgroundColor: Colors.purple, // Set the background color to purple
       ),
       body: Center(
         child: Column(
@@ -50,8 +62,8 @@ class _BMICalculatorState extends State<BMICalculator> {
               children: <Widget>[
                 Slider(
                   value: weight,
-                  min: 25.0,
-                  max: 200.0,
+                  min: 0.0,
+                  max: 150.0,
                   onChanged: (newValue) {
                     setState(() {
                       weight = newValue;
@@ -70,8 +82,8 @@ class _BMICalculatorState extends State<BMICalculator> {
               children: <Widget>[
                 Slider(
                   value: height,
-                  min: 50.0,
-                  max: 230.0,
+                  min: 0.0,
+                  max: 220.0,
                   onChanged: (newValue) {
                     setState(() {
                       height = newValue;
@@ -79,11 +91,13 @@ class _BMICalculatorState extends State<BMICalculator> {
                     });
                   },
                 ),
-                const Text('wysokość:'),
+                const Text('wysokość: '),
                 Text(height.toStringAsFixed(1)),
+                const Text(' cm'),
               ],
             ),
-            Text('Twoje BMI: ${bmi.toStringAsFixed(1)}'),
+            Text('Twoje BMI: ${bmi.toStringAsFixed(1)}',
+                style: TextStyle(height: 5, fontSize: 40)),
           ],
         ),
       ),
