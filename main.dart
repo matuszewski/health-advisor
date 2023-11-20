@@ -1,7 +1,19 @@
+/*
+  health advisor app
+  author: Krzysztof Matuszewski <krzysiekmatuszewski@outlook.com>
+  github: @matuszewski
+  description: This is a flutter mobile application for calculating health
+               and diet indicators such as BMI, BMR or daily water consumption
+  license: MIT
+  AHE Lodz 2023
+*/
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const BMICalculatorApp());
 
+
+// setting 
 final ThemeData customTheme = ThemeData(
   primaryColor: Colors.red, // Change this color to your desired primary color
   // Add more properties like textTheme, fontFamily, etc. if needed
