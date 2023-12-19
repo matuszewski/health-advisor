@@ -51,6 +51,13 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Text('Aplikacja do obliczania wskaźników\nzdrowotnych',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const Text(
+                'Krzysztof Matuszewski\nAHE Łódź 2023/2024\nkrzysiekmatuszewski@outlook.com',
+                style: TextStyle(fontSize: 14)),
+            const SizedBox(height: 100),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/bmi');
@@ -71,8 +78,32 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/bmr');
               },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green, // Background color
+                onPrimary: Colors.white, // Text color
+                minimumSize: Size(200, 70),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
               child:
                   const Text('BMR Calculator', style: TextStyle(fontSize: 18)),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/water');
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue, // Background color
+                onPrimary: Colors.white, // Text color
+                minimumSize: Size(200, 70),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child:
+                  const Text('Kalkulator wody', style: TextStyle(fontSize: 18)),
             ),
           ],
         ),
