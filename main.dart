@@ -10,33 +10,73 @@
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(const BMICalculatorApp());
+void main() => runApp(const HealthAdvisorApp());
 
-
-// setting 
 final ThemeData customTheme = ThemeData(
-  primaryColor: Colors.red, // Change this color to your desired primary color
-  // Add more properties like textTheme, fontFamily, etc. if needed
+  primaryColor: Colors.red,
+  scaffoldBackgroundColor: Colors.amber[50], // Ivory-like background color
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor:
-        Colors.green, // Change this color to your desired FAB color
+    backgroundColor: Colors.green[500], // Medium green color for FAB
   ),
 );
 
-class BMICalculatorApp extends StatelessWidget {
-  const BMICalculatorApp({Key? key});
+class HealthAdvisorApp extends StatelessWidget {
+  const HealthAdvisorApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: customTheme, // Use the custom theme here
+      theme: customTheme,
       initialRoute: '/',
-
       routes: {
-        '/': (context) => const BMICalculator(),
-        '/bmr': (context) => const BMRCalculator(),
+        '/': (context) => const HomeScreen(),
         '/bmi': (context) => const BMICalculator(),
+        '/bmr': (context) => const BMRCalculator(),
       },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Health Advisor'),
+        backgroundColor: Colors.purple,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/bmi');
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.purple, // Background color
+                onPrimary: Colors.white, // Text color
+                minimumSize: Size(200, 70),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child:
+                  const Text('BMI Calculator', style: TextStyle(fontSize: 20)),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/bmr');
+              },
+              child:
+                  const Text('BMR Calculator', style: TextStyle(fontSize: 18)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -49,26 +89,25 @@ class BMICalculator extends StatefulWidget {
 }
 
 class _BMICalculatorState extends State<BMICalculator> {
-  double weight = 70.0; // Initial weight in kilograms
-  double height = 170.0; // Initial height in centimeters
+  double weight = 70.0;
+  double height = 170.0;
   double bmi = 0.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kalkualtor BMI'),
-        backgroundColor: Colors.purple, // Set the background color to purple
+        title: const Text('BMI Calculator'),
+        backgroundColor: Colors.purple,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Wpisz swoje dane:',
-              style: TextStyle(fontSize: 18),
+              'Enter your details:',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            // Weight input
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -83,12 +122,11 @@ class _BMICalculatorState extends State<BMICalculator> {
                     });
                   },
                 ),
-                const Text('waga: '),
-                Text(weight.toStringAsFixed(1)),
-                const Text(' kg'),
+                const Text('Weight: ', style: TextStyle(fontSize: 18)),
+                Text(weight.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
+                const Text(' kg', style: TextStyle(fontSize: 18)),
               ],
             ),
-            // Height input
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -103,21 +141,15 @@ class _BMICalculatorState extends State<BMICalculator> {
                     });
                   },
                 ),
-                const Text('wysokość: '),
-                Text(height.toStringAsFixed(1)),
-                const Text(' cm'),
+                const Text('Height: ', style: TextStyle(fontSize: 18)),
+                Text(height.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
+                const Text(' cm', style: TextStyle(fontSize: 18)),
               ],
             ),
-            Text('Twoje BMI: ${bmi.toStringAsFixed(1)}',
+            Text('Your BMI: ${bmi.toStringAsFixed(1)}',
                 style: TextStyle(height: 5, fontSize: 40)),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/bmr');
-        },
-        child: const Icon(Icons.accessibility_new),
       ),
     );
   }
@@ -137,8 +169,8 @@ class BMRCalculator extends StatefulWidget {
 
 class _BMRCalculatorState extends State<BMRCalculator> {
   int age = 25;
-  double weight = 70.0; // Initial weight in kilograms
-  double height = 170.0; // Initial height in centimeters
+  double weight = 70.0;
+  double height = 170.0;
   String gender = 'Male';
   double bmr = 0.0;
 
@@ -146,21 +178,20 @@ class _BMRCalculatorState extends State<BMRCalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kalkualtor BMR'),
+        title: const Text('BMR Calculator'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Wpisz swoje dane:',
-              style: TextStyle(fontSize: 18),
+              'Enter your details:',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            // Age input
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Wiek:'),
+                const Text('Age:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: age.toDouble(),
                   min: 0,
@@ -172,16 +203,15 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                Text(age.toString()),
+                Text(age.toString(), style: TextStyle(fontSize: 18)),
               ],
             ),
-            // Gender selection
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Płeć:'),
+                const Text('Gender:', style: TextStyle(fontSize: 18)),
                 Radio<String>(
-                  value: 'Mężczyzna',
+                  value: 'Male',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
@@ -190,9 +220,9 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                const Text('Mężczyzna'),
+                const Text('Male', style: TextStyle(fontSize: 18)),
                 Radio<String>(
-                  value: 'Kobieta',
+                  value: 'Female',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
@@ -201,14 +231,13 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                const Text('Kobieta'),
+                const Text('Female', style: TextStyle(fontSize: 18)),
               ],
             ),
-            // Weight input
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Waga:'),
+                const Text('Weight:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: weight,
                   min: 0.0,
@@ -220,14 +249,13 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                Text(weight.toStringAsFixed(1)),
+                Text(weight.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
               ],
             ),
-            // Height input
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Wysokość:'),
+                const Text('Height:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: height,
                   min: 0.0,
@@ -239,10 +267,11 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                Text(height.toStringAsFixed(1)),
+                Text(height.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
               ],
             ),
-            Text('Twoje BMR: ${bmr.toStringAsFixed(1)} kcal/dziennie'),
+            Text('Your BMR: ${bmr.toStringAsFixed(1)} kcal/day',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -250,7 +279,7 @@ class _BMRCalculatorState extends State<BMRCalculator> {
   }
 
   void calculateBMR() {
-    if (gender == 'Mężczyzna') {
+    if (gender == 'Male') {
       bmr = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
     } else {
       bmr = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
