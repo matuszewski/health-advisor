@@ -7,14 +7,13 @@
   license: MIT
   AHE Lodz 2023
 */
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(const HealthAdvisorApp());
 
 final ThemeData customTheme = ThemeData(
   primaryColor: Colors.red,
-  scaffoldBackgroundColor: Colors.amber[50], // Ivory-like background color
+  scaffoldBackgroundColor: Color(0xfff6f6f6), // Ivory-like background color
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Colors.green[500], // Medium green color for FAB
   ),
@@ -32,6 +31,7 @@ class HealthAdvisorApp extends StatelessWidget {
         '/': (context) => const HomeScreen(),
         '/bmi': (context) => const BMICalculator(),
         '/bmr': (context) => const BMRCalculator(),
+        '/water': (context) => const WaterCalculator(),
       },
     );
   }
@@ -45,7 +45,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Health Advisor'),
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.black,
+        toolbarHeight: 100,
       ),
       body: Center(
         child: Column(
@@ -209,7 +210,136 @@ class _BMRCalculatorState extends State<BMRCalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMR Calculator'),
+        title: const Text('Kalkulator BMR'),
+        backgroundColor: Colors.green,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            const Text(
+              'Enter your details:',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const Text('Age:', style: TextStyle(fontSize: 18)),
+                Slider(
+                  value: age.toDouble(),
+                  min: 0,
+                  max: 100,
+                  onChanged: (newValue) {
+                    setState(() {
+                      age = newValue.toInt();
+                      calculateBMR();
+                    });
+                  },
+                ),
+                Text(age.toString(), style: TextStyle(fontSize: 18)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const Text('Gender:', style: TextStyle(fontSize: 18)),
+                Radio<String>(
+                  value: 'Male',
+                  groupValue: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value!;
+                      calculateBMR();
+                    });
+                  },
+                ),
+                const Text('Male', style: TextStyle(fontSize: 18)),
+                Radio<String>(
+                  value: 'Female',
+                  groupValue: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value!;
+                      calculateBMR();
+                    });
+                  },
+                ),
+                const Text('Female', style: TextStyle(fontSize: 18)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const Text('Weight:', style: TextStyle(fontSize: 18)),
+                Slider(
+                  value: weight,
+                  min: 0.0,
+                  max: 150.0,
+                  onChanged: (newValue) {
+                    setState(() {
+                      weight = newValue;
+                      calculateBMR();
+                    });
+                  },
+                ),
+                Text(weight.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                const Text('Height:', style: TextStyle(fontSize: 18)),
+                Slider(
+                  value: height,
+                  min: 0.0,
+                  max: 220.0,
+                  onChanged: (newValue) {
+                    setState(() {
+                      height = newValue;
+                      calculateBMR();
+                    });
+                  },
+                ),
+                Text(height.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
+              ],
+            ),
+            Text('Your BMR: ${bmr.toStringAsFixed(1)} kcal/day',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void calculateBMR() {
+    if (gender == 'Male') {
+      bmr = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
+    } else {
+      bmr = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
+    }
+  }
+}
+
+class WaterCalculator extends StatefulWidget {
+  const WaterCalculator({Key? key});
+
+  @override
+  _WaterCalculatorState createState() => _WaterCalculatorState();
+}
+
+class _WaterCalculatorState extends State<WaterCalculator> {
+  int age = 25;
+  double weight = 70.0;
+  double height = 170.0;
+  String gender = 'Male';
+  double bmr = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Kalkulator wody'),
+        backgroundColor: Colors.blue,
       ),
       body: Center(
         child: Column(
