@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Health Advisor'),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.red,
         toolbarHeight: 100,
       ),
       body: Center(
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('Aplikacja do obliczania wskaźników\nzdrowotnych',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             const Text(
                 'Krzysztof Matuszewski\nAHE Łódź 2023/2024\nkrzysiekmatuszewski@outlook.com',
@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child:
-                  const Text('BMI Calculator', style: TextStyle(fontSize: 20)),
+                  const Text('Kalkulator BMI', style: TextStyle(fontSize: 20)),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               child:
-                  const Text('BMR Calculator', style: TextStyle(fontSize: 18)),
+                  const Text('Kalkulator BMR', style: TextStyle(fontSize: 18)),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -129,7 +129,7 @@ class _BMICalculatorState extends State<BMICalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI Calculator'),
+        title: const Text('Kalkulator BMI'),
         backgroundColor: Colors.purple,
       ),
       body: Center(
@@ -137,8 +137,9 @@ class _BMICalculatorState extends State<BMICalculator> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Enter your details:',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Wprowadź dane:',
+              style: TextStyle(
+                  height: 3, fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -154,7 +155,7 @@ class _BMICalculatorState extends State<BMICalculator> {
                     });
                   },
                 ),
-                const Text('Weight: ', style: TextStyle(fontSize: 18)),
+                const Text('Waga: ', style: TextStyle(fontSize: 18)),
                 Text(weight.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
                 const Text(' kg', style: TextStyle(fontSize: 18)),
               ],
@@ -173,13 +174,14 @@ class _BMICalculatorState extends State<BMICalculator> {
                     });
                   },
                 ),
-                const Text('Height: ', style: TextStyle(fontSize: 18)),
+                const Text('Wysokość: ', style: TextStyle(fontSize: 18)),
                 Text(height.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
                 const Text(' cm', style: TextStyle(fontSize: 18)),
               ],
             ),
-            Text('Your BMI: ${bmi.toStringAsFixed(1)}',
-                style: TextStyle(height: 5, fontSize: 40)),
+            Text('Twoje BMI: ${bmi.toStringAsFixed(1)}',
+                style: TextStyle(
+                    height: 7, fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -203,7 +205,7 @@ class _BMRCalculatorState extends State<BMRCalculator> {
   int age = 25;
   double weight = 70.0;
   double height = 170.0;
-  String gender = 'Male';
+  String gender = 'Mężczyzna';
   double bmr = 0.0;
 
   @override
@@ -218,13 +220,14 @@ class _BMRCalculatorState extends State<BMRCalculator> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Enter your details:',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Wprowadź dane:',
+              style: TextStyle(
+                  height: 3, fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Age:', style: TextStyle(fontSize: 18)),
+                const Text('Wiek:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: age.toDouble(),
                   min: 0,
@@ -242,9 +245,9 @@ class _BMRCalculatorState extends State<BMRCalculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Gender:', style: TextStyle(fontSize: 18)),
+                const Text('Płeć:', style: TextStyle(fontSize: 18)),
                 Radio<String>(
-                  value: 'Male',
+                  value: 'Mężczyzna',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
@@ -253,9 +256,9 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                const Text('Male', style: TextStyle(fontSize: 18)),
+                const Text('Mężczyzna', style: TextStyle(fontSize: 18)),
                 Radio<String>(
-                  value: 'Female',
+                  value: 'Kobieta',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
@@ -264,13 +267,13 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                     });
                   },
                 ),
-                const Text('Female', style: TextStyle(fontSize: 18)),
+                const Text('Kobieta', style: TextStyle(fontSize: 18)),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Weight:', style: TextStyle(fontSize: 18)),
+                const Text('Wysokość:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: weight,
                   min: 0.0,
@@ -288,7 +291,7 @@ class _BMRCalculatorState extends State<BMRCalculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Height:', style: TextStyle(fontSize: 18)),
+                const Text('Wysokość:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: height,
                   min: 0.0,
@@ -303,8 +306,9 @@ class _BMRCalculatorState extends State<BMRCalculator> {
                 Text(height.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
               ],
             ),
-            Text('Your BMR: ${bmr.toStringAsFixed(1)} kcal/day',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text('Twoje BMR: ${bmr.toStringAsFixed(1)} kcal/dzień',
+                style: TextStyle(
+                    height: 7, fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -312,7 +316,7 @@ class _BMRCalculatorState extends State<BMRCalculator> {
   }
 
   void calculateBMR() {
-    if (gender == 'Male') {
+    if (gender == 'Mężczyzna') {
       bmr = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
     } else {
       bmr = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
@@ -331,8 +335,8 @@ class _WaterCalculatorState extends State<WaterCalculator> {
   int age = 25;
   double weight = 70.0;
   double height = 170.0;
-  String gender = 'Male';
-  double bmr = 0.0;
+  String gender = 'Mężczyzna';
+  double waterRequirement = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -346,13 +350,14 @@ class _WaterCalculatorState extends State<WaterCalculator> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Enter your details:',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              'Wprowadź swoje dane:',
+              style: TextStyle(
+                  height: 3, fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Age:', style: TextStyle(fontSize: 18)),
+                const Text('Wiek:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: age.toDouble(),
                   min: 0,
@@ -360,7 +365,7 @@ class _WaterCalculatorState extends State<WaterCalculator> {
                   onChanged: (newValue) {
                     setState(() {
                       age = newValue.toInt();
-                      calculateBMR();
+                      calculateWaterRequirement();
                     });
                   },
                 ),
@@ -370,35 +375,35 @@ class _WaterCalculatorState extends State<WaterCalculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Gender:', style: TextStyle(fontSize: 18)),
+                const Text('Płeć:', style: TextStyle(fontSize: 18)),
                 Radio<String>(
-                  value: 'Male',
+                  value: 'Mężczyzna',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
                       gender = value!;
-                      calculateBMR();
+                      calculateWaterRequirement();
                     });
                   },
                 ),
-                const Text('Male', style: TextStyle(fontSize: 18)),
+                const Text('Mężczyzna', style: TextStyle(fontSize: 18)),
                 Radio<String>(
                   value: 'Female',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
                       gender = value!;
-                      calculateBMR();
+                      calculateWaterRequirement();
                     });
                   },
                 ),
-                const Text('Female', style: TextStyle(fontSize: 18)),
+                const Text('Kobieta', style: TextStyle(fontSize: 18)),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Text('Weight:', style: TextStyle(fontSize: 18)),
+                const Text('Waga:', style: TextStyle(fontSize: 18)),
                 Slider(
                   value: weight,
                   min: 0.0,
@@ -406,32 +411,15 @@ class _WaterCalculatorState extends State<WaterCalculator> {
                   onChanged: (newValue) {
                     setState(() {
                       weight = newValue;
-                      calculateBMR();
+                      calculateWaterRequirement();
                     });
                   },
                 ),
                 Text(weight.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                const Text('Height:', style: TextStyle(fontSize: 18)),
-                Slider(
-                  value: height,
-                  min: 0.0,
-                  max: 220.0,
-                  onChanged: (newValue) {
-                    setState(() {
-                      height = newValue;
-                      calculateBMR();
-                    });
-                  },
-                ),
-                Text(height.toStringAsFixed(1), style: TextStyle(fontSize: 18)),
-              ],
-            ),
-            Text('Your BMR: ${bmr.toStringAsFixed(1)} kcal/day',
+            Text(
+                'Twoje zapotrzebowanie na wodę: ${waterRequirement.toStringAsFixed(1)} ml/dzień',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           ],
         ),
@@ -439,11 +427,31 @@ class _WaterCalculatorState extends State<WaterCalculator> {
     );
   }
 
-  void calculateBMR() {
-    if (gender == 'Male') {
-      bmr = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
-    } else {
-      bmr = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
+  void calculateWaterRequirement() {
+    // basic water requirement: 30 ml per kg of body weight
+    double basicRequirement = 30 * weight;
+
+    // adjustments based on age and gender
+    double ageFactor = 1.0;
+    double genderFactor = 1.0;
+
+    // adjustments for age
+    if (age < 18) {
+      // increase water requirement for younger individuals
+      ageFactor = 1.2;
+    } else if (age > 50) {
+      // decrease water requirement for older individuals
+      ageFactor = 0.8;
     }
+
+    // adjustments for gender
+    if (gender == 'Kobieta') {
+      // women need slightly less water than men
+      genderFactor = 0.9;
+    }
+
+    // calculate final water requirement
+    waterRequirement = basicRequirement * ageFactor * genderFactor;
   }
 }
+
