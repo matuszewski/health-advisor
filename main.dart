@@ -388,7 +388,7 @@ class _WaterCalculatorState extends State<WaterCalculator> {
                 ),
                 const Text('Mężczyzna', style: TextStyle(fontSize: 18)),
                 Radio<String>(
-                  value: 'Female',
+                  value: 'Kobieta',
                   groupValue: gender,
                   onChanged: (value) {
                     setState(() {
